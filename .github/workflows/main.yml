@@ -25,7 +25,6 @@ jobs:
 
       - name: Build and Execute Maven Goals
         run: |
-          cd maven-app
           mvn clean
           mvn validate
           mvn compile
