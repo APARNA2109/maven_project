@@ -1,0 +1,37 @@
+name: Maven Build and Goals Execution
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: maven
+
+      - name: Build and Execute Maven Goals
+        run: |
+          cd maven-app
+          mvn clean
+          mvn validate
+          mvn compile
+          mvn test
+          mvn package
+          mvn verify
+          mvn install
+          mvn site
+          mvn deploy
